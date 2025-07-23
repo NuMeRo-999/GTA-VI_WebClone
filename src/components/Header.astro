@@ -1,0 +1,26 @@
+---
+import LogoVI from "@/assets/logo-vi.svg";
+import Sidebar from "./Sidebar.astro";
+---
+
+<header class="flex justify-between w-full px-[56.5px] py-[45.2px]">
+  <LogoVI
+    class="size-[34px] cursor-pointer hover:text-yellow-100 transition-colors duration-500"
+  />
+
+  <button
+    id="menu-button"
+    class="relative size-12 group cursor-pointer menu-closed z-40 transition-colors duration-500"
+  >
+    <div
+      class="line top-line bg-white group-hover:bg-yellow-100 transition-colors duration-500"
+    >
+    </div>
+    <div
+      class="line bottom-line bg-white group-hover:bg-yellow-100 transition-colors duration-500"
+    >
+    </div>
+  </button>
+
+  <Sidebar />
+</header>

@@ -3,109 +3,25 @@ import Layout from "@/layouts/Layout.astro";
 import "@/styles/global.css";
 import HeroKeyLogo from "@/assets/hero-key-logo.webp";
 import HeroKeyBackground from "@/assets/hero-key-background.webp";
-import LogoVI from "@/assets/logo-vi.svg";
 import PlayButtonIcon from "@/assets/play-button.svg";
-import LogoVICutted from "@/assets/logo-cutted.svg";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import HeroSection from "@/components/HeroSection.astro";
 ---
 
 <Layout>
-  <div id="logo-mask" class="fixed top-0 w-full h-screen">
-    <section>
-      <picture
-        id="hero-key"
-        class="h-screen scale-125 block overflow-hidden fixed"
-      >
-        <img
-          id="hero-key-logo"
-          src={HeroKeyLogo.src}
-          class="absolute w-full h-full object-cover"
-        />
-        <img
-          id="hero-key-background"
-          src={HeroKeyBackground.src}
-          class="w-full h-full object-cover"
-        />
-      </picture>
-    </section>
-  </div>
+  <HeroSection />
 
-  <div
-    class="fixed flex flex-col justify-between items-center h-screen px-16 py-13 w-full"
-  >
-    <header class="flex justify-between w-full">
-      <LogoVI
-        class="size-[34px] cursor-pointer hover:text-yellow-100 transition-colors duration-500"
-      />
-      <button
-        id="menu-button"
-        class="relative w-7 h-[18px] group cursor-pointer menu-closed"
-      >
-        <div class="line top-line"></div>
-        <div class="line bottom-line"></div>
-      </button>
-    </header>
+  <div class="fixed flex flex-col justify-between items-center h-screen w-full">
+    <Header />
 
     <button class="m-auto cursor-pointer inline-block">
       <PlayButtonIcon
-        class="size-26 backdrop-blur-lg rounded-full hover:scale-110 transition-transform duration-500"
+        class="size-26 backdrop-blur-lg mb-25 rounded-full hover:scale-110 transition-transform duration-500"
         id="hero-play-button"
       />
     </button>
 
-    <footer id="hero-footer" class="absolute bottom-2">
-      <LogoVICutted
-        class="text-white w-28 drop-shadow-[0_0_2px_rgba(255,255,255,.5),0_0_8px_#000]"
-      />
-      <span
-        class="text-[13px] absolute mb-9 uppercase tracking-[6px] top-[54px] whitespace-nowrap text-center text-shadow-[0_0_2px_rgba(255,255,255,.5),0_0_8px_#000] left-1/2 -translate-x-1/2"
-      >
-        Ver el Tráiler 2
-      </span>
-    </footer>
+    <Footer />
   </div>
 </Layout>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const tl = gsap.timeline({
-    ease: "power2.out",
-    scrollTrigger: {
-      scrub: 1,
-    },
-  });
-
-  tl.to("#hero-key", { duration: 1, scale: 1 })
-    .to("#hero-key-logo", { opacity: 0 }, "<")
-    .to("#hero-footer", { opacity: 0 }, "<")
-    .to("#hero-play-button", { opacity: 0 }, "<")
-    .to(
-      "#logo-mask",
-      {
-        maskSize: "clamp(20vh, 25%, 30vh)",
-      },
-      0.15
-    )
-    .to(
-      "#hero-key",
-      {
-        opacity: 0,
-        duration: 0.2,
-      },
-      0.4
-    );
-
-  const menuButton = document.getElementById("menu-button");
-  let menuOpen = false;
-
-  menuButton?.addEventListener("click", () => {
-    menuOpen = !menuOpen;
-    const classList = menuButton.classList;
-
-    classList.toggle("menu-open", menuOpen);
-    classList.toggle("menu-closed", !menuOpen);
-  });
-</script>
